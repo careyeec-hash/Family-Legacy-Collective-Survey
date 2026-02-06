@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Legacy Collective - Market Research Survey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(160deg, #1a365d 0%, #2d3748 50%, #4a5568 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(66, 153, 225, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(159, 122, 234, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.4),
+                0 0 0 1px rgba(255,255,255,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c5282 0%, #2d3748 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.8em;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.15em;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #f0f4f8;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2c5282 0%, #4299e1 100%);
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(66, 153, 225, 0.5);
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .question-section {
+            display: none;
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .question-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.75em;
+            color: #1a202c;
+            margin-bottom: 15px;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.3px;
+        }
+
+        .question-subtitle {
+            font-size: 0.95em;
+            color: #718096;
+            margin-bottom: 30px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .option {
+            background: #f7fafc;
+            padding: 20px 24px;
+            margin-bottom: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .option:hover {
+            background: #edf2f7;
+            border-color: #cbd5e0;
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .option.selected {
+            background: #ebf8ff;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 16px;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #2c5282;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 16px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1em;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+            background: #f7fafc;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #4299e1;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+        }
+
+        textarea.text-input {
+            min-height: 130px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .slider-container {
+            margin: 35px 0;
+            padding: 25px;
+            background: #f7fafc;
+            border-radius: 12px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #e2e8f0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2c5282 0%, #4299e1 100%);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(44, 82, 130, 0.4);
+            transition: transform 0.2s ease;
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2c5282 0%, #4299e1 100%);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 12px rgba(44, 82, 130, 0.4);
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            color: #718096;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .slider-value {
+            text-align: center;
+            font-size: 2.5em;
+            color: #2c5282;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05em;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            flex: 1;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(44, 82, 130, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(44, 82, 130, 0.4);
+        }
+
+        .btn-secondary {
+            background: #edf2f7;
+            color: #2d3748;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            border-color: #cbd5e0;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .result-card {
+            background: #f7fafc;
+            padding: 28px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            border-left: 5px solid #2c5282;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .result-card h3 {
+            color: #2c5282;
+            margin-bottom: 16px;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .result-card p {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 14px rgba(44, 82, 130, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(44, 82, 130, 0.4);
+        }
+
+        .thank-you {
+            text-align: center;
+            padding: 50px 0 30px;
+        }
+
+        .thank-you h2 {
+            color: #2c5282;
+            font-size: 2.5em;
+            margin-bottom: 18px;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+        }
+
+        .thank-you p {
+            color: #4a5568;
+            font-size: 1.15em;
+            line-height: 1.7;
+        }
+        
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 32, 44, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .loading-overlay.active {
+            display: flex;
+        }
+        
+        .loading-spinner {
+            text-align: center;
+            color: white;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.2);
+            border-top: 4px solid #4299e1;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 35px 25px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header p {
+                font-size: 0.95em;
+            }
+
+            .content {
+                padding: 35px 25px;
+            }
+
+            .question-title {
+                font-size: 1.4em;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .option {
+                padding: 16px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Submitting your responses...</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>Family Legacy Collective</h1>
+                <p>Help us understand your needs for comprehensive end-of-life planning</p>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+            <!-- Question 1: Experience Category -->
+            <div class="question-section active" data-question="1">
+                <div class="question-title">Which best describes your current situation?</div>
+                <div class="question-subtitle">This helps us understand your perspective</div>
+                
+                <label class="option">
+                    <input type="radio" name="q1" value="preventative">
+                    <span>I'm planning ahead for my own end-of-life (preventative planning)</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q1" value="parent-aging">
+                    <span>I have aging parents who haven't prepared for end-of-life</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q1" value="acute">
+                    <span>A family member is currently in hospice/end-of-life care</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q1" value="post">
+                    <span>I've recently lost a parent/family member and experienced family conflict</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q1" value="professional">
+                    <span>I'm a professional in this field (advisor, therapist, lawyer, etc.)</span>
+                </label>
+            </div>
+
+            <!-- Question 2: Pain Points -->
+            <div class="question-section" data-question="2">
+                <div class="question-title">What concerns you most about end-of-life planning?</div>
+                <div class="question-subtitle">Select all that apply</div>
+                
+                <label class="option">
+                    <input type="checkbox" name="q2" value="family-conflict">
+                    <span>Preventing or resolving family conflicts</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q2" value="financial-confusion">
+                    <span>Financial complexity and estate planning</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q2" value="legal-process">
+                    <span>Legal processes and documentation</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q2" value="emotional-support">
+                    <span>Emotional support for family members</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q2" value="coordination">
+                    <span>Coordinating multiple service providers (lawyers, financial advisors, therapists)</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q2" value="communication">
+                    <span>Having difficult conversations with family</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q2" value="time">
+                    <span>Not knowing where to start or what to do</span>
+                </label>
+            </div>
+
+            <!-- Question 3: Current Experience -->
+            <div class="question-section" data-question="3">
+                <div class="question-title">Have you experienced family conflict related to a parent's death or estate?</div>
+                
+                <label class="option">
+                    <input type="radio" name="q3" value="yes-severe">
+                    <span>Yes, severe conflict (siblings stopped speaking)</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q3" value="yes-moderate">
+                    <span>Yes, moderate conflict (tensions but still communicate)</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q3" value="yes-minor">
+                    <span>Yes, minor disagreements that were resolved</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q3" value="no">
+                    <span>No, we handled it smoothly</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q3" value="not-experienced">
+                    <span>I haven't experienced this yet</span>
+                </label>
+            </div>
+
+            <!-- Question 4: Current Services -->
+            <div class="question-section" data-question="4">
+                <div class="question-title">What services have you used or considered for end-of-life planning?</div>
+                <div class="question-subtitle">Select all that apply</div>
+                
+                <label class="option">
+                    <input type="checkbox" name="q4" value="estate-attorney">
+                    <span>Estate planning attorney</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q4" value="financial-advisor">
+                    <span>Financial advisor/planner</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q4" value="therapist">
+                    <span>Family therapist or counselor</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q4" value="online-tools">
+                    <span>Online tools (Trust & Will, Cake, etc.)</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q4" value="none">
+                    <span>None - haven't started planning yet</span>
+                </label>
+            </div>
+
+            <!-- Question 5: Frustrations -->
+            <div class="question-section" data-question="5">
+                <div class="question-title">What frustrates you about current end-of-life planning services?</div>
+                <div class="question-subtitle">Select your top 3 frustrations</div>
+                
+                <label class="option">
+                    <input type="checkbox" name="q5" value="siloed">
+                    <span>Services are too fragmented - have to coordinate multiple providers</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q5" value="impersonal">
+                    <span>Services feel impersonal or transactional</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q5" value="expensive">
+                    <span>Too expensive or unclear pricing</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q5" value="family-ignored">
+                    <span>Focus only on individual, not the whole family</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q5" value="emotional-ignored">
+                    <span>Ignore emotional and relational aspects</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q5" value="complex">
+                    <span>Process is too complicated and overwhelming</span>
+                </label>
+            </div>
+
+            <!-- Question 6: Value Proposition -->
+            <div class="question-section" data-question="6">
+                <div class="question-title">How valuable would an integrated service be that combines financial planning, legal support, family counseling, and spiritual guidance all in one place?</div>
+                
+                <div class="slider-container">
+                    <div class="slider-value" id="valueDisplay">5</div>
+                    <input type="range" min="0" max="10" value="5" class="slider" id="valueSlider">
+                    <div class="slider-labels">
+                        <span>Not valuable at all</span>
+                        <span>Extremely valuable</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 7: Features Priority -->
+            <div class="question-section" data-question="7">
+                <div class="question-title">Which features would be most important to you?</div>
+                <div class="question-subtitle">Rank your top 3 (1 = most important)</div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">Comprehensive estate planning (financial + legal)</label>
+                    <input type="number" class="text-input" name="rank-estate" placeholder="Enter rank (1-8)" min="1" max="8">
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">Family mediation and conflict resolution</label>
+                    <input type="number" class="text-input" name="rank-mediation" placeholder="Enter rank (1-8)" min="1" max="8">
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">Emotional/grief counseling for family</label>
+                    <input type="number" class="text-input" name="rank-counseling" placeholder="Enter rank (1-8)" min="1" max="8">
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">Digital platform to manage all documents and communications</label>
+                    <input type="number" class="text-input" name="rank-platform" placeholder="Enter rank (1-8)" min="1" max="8">
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">Facilitated family meetings/conversations</label>
+                    <input type="number" class="text-input" name="rank-meetings" placeholder="Enter rank (1-8)" min="1" max="8">
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">Spiritual/legacy guidance</label>
+                    <input type="number" class="text-input" name="rank-spiritual" placeholder="Enter rank (1-8)" min="1" max="8">
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">Coordination with hospice and healthcare</label>
+                    <input type="number" class="text-input" name="rank-hospice" placeholder="Enter rank (1-8)" min="1" max="8">
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">Post-death support (estate sales, real estate, etc.)</label>
+                    <input type="number" class="text-input" name="rank-postdeath" placeholder="Enter rank (1-8)" min="1" max="8">
+                </div>
+            </div>
+
+            <!-- Question 8: Pricing -->
+            <div class="question-section" data-question="8">
+                <div class="question-title">What would you expect to pay for a comprehensive service like this?</div>
+                <div class="question-subtitle">Consider it replaces multiple separate providers</div>
+                
+                <label class="option">
+                    <input type="radio" name="q8" value="under-2k">
+                    <span>Under $2,000 (one-time)</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q8" value="2k-5k">
+                    <span>$2,000 - $5,000 (one-time)</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q8" value="5k-10k">
+                    <span>$5,000 - $10,000 (one-time)</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q8" value="10k-20k">
+                    <span>$10,000 - $20,000 (one-time)</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q8" value="subscription">
+                    <span>Monthly/annual subscription model ($100-500/month)</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q8" value="tiered">
+                    <span>Tiered pricing based on complexity of estate</span>
+                </label>
+            </div>
+
+            <!-- Question 9: Payment Model Preference -->
+            <div class="question-section" data-question="9">
+                <div class="question-title">How would you prefer to engage with this service?</div>
+                
+                <label class="option">
+                    <input type="radio" name="q9" value="prevention">
+                    <span>Preventative package - planning before issues arise</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q9" value="acute">
+                    <span>Acute care - help during active end-of-life situation</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q9" value="post">
+                    <span>Post-death support - resolving conflicts after loss</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q9" value="ongoing">
+                    <span>Ongoing relationship - subscription for continuous support</span>
+                </label>
+                
+                <label class="option">
+                    <input type="radio" name="q9" value="all">
+                    <span>All phases - one service through entire journey</span>
+                </label>
+            </div>
+
+            <!-- Question 10: Demographics -->
+            <div class="question-section" data-question="10">
+                <div class="question-title">Tell us a bit about yourself</div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">Age Range</label>
+                    <select class="text-input" name="age">
+                        <option value="">Select age range</option>
+                        <option value="under-30">Under 30</option>
+                        <option value="30-40">30-40</option>
+                        <option value="41-50">41-50</option>
+                        <option value="51-60">51-60</option>
+                        <option value="61-70">61-70</option>
+                        <option value="over-70">Over 70</option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">Household Income (optional)</label>
+                    <select class="text-input" name="income">
+                        <option value="">Prefer not to say</option>
+                        <option value="under-50k">Under $50k</option>
+                        <option value="50k-100k">$50k - $100k</option>
+                        <option value="100k-200k">$100k - $200k</option>
+                        <option value="200k-500k">$200k - $500k</option>
+                        <option value="over-500k">Over $500k</option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">How many siblings do you have?</label>
+                    <input type="number" class="text-input" name="siblings" placeholder="Number of siblings" min="0">
+                </div>
+            </div>
+
+            <!-- Question 11: Discovery -->
+            <div class="question-section" data-question="11">
+                <div class="question-title">How would you prefer to discover a service like this?</div>
+                <div class="question-subtitle">Select all that apply</div>
+                
+                <label class="option">
+                    <input type="checkbox" name="q11" value="referral-professional">
+                    <span>Referral from financial advisor, lawyer, or therapist</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q11" value="referral-friend">
+                    <span>Recommendation from friend/family</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q11" value="employer">
+                    <span>Offered through employer benefits</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q11" value="healthcare">
+                    <span>Recommended by healthcare provider/hospital</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q11" value="online">
+                    <span>Online search when I need it</span>
+                </label>
+                
+                <label class="option">
+                    <input type="checkbox" name="q11" value="social">
+                    <span>Social media or content marketing</span>
+                </label>
+            </div>
+
+            <!-- Question 12: Open Feedback -->
+            <div class="question-section" data-question="12">
+                <div class="question-title">Final thoughts</div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">What's the biggest barrier preventing you from planning ahead for end-of-life?</label>
+                    <textarea class="text-input" name="barrier" placeholder="Share your thoughts..."></textarea>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">If you could change one thing about how families handle end-of-life planning, what would it be?</label>
+                    <textarea class="text-input" name="change" placeholder="Share your thoughts..."></textarea>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 500;">Email (optional - if you'd like to stay updated on our launch)</label>
+                    <input type="email" class="text-input" name="email" placeholder="your@email.com">
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="results">
+                <div class="thank-you">
+                    <h2>Thank You! 🙏</h2>
+                    <p>Your insights are invaluable in helping us create a service that truly serves families.</p>
+                </div>
+                
+                <div class="result-card">
+                    <h3>Your Responses</h3>
+                    <div id="responsesSummary"></div>
+                </div>
+                
+                <button class="download-btn" onclick="downloadResults()">Download My Responses (CSV)</button>
+                
+                <div style="text-align: center; margin-top: 30px; color: #666;">
+                    <p>Interested in beta testing? Email us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f9fef6ffd0f6f1fdf9fce9fcf5f7f1f3e9f3fffcfcf5f3e4f9e6f5bef3fffd">[email&#160;protected]</a></p>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="buttons">
+                <button class="btn btn-secondary" id="prevBtn" onclick="changeQuestion(-1)" style="display: none;">Previous</button>
+                <button class="btn btn-primary" id="nextBtn" onclick="changeQuestion(1)">Next</button>
+                <button class="btn btn-primary" id="submitBtn" onclick="submitSurvey()" style="display: none;">Submit Survey</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURATION - Replace with your Google Apps Script Web App URL
+        // See SETUP-INSTRUCTIONS.md for complete setup guide
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxnoKSR65OeSn-DF6ZgHe95GnzGQJhi-cEyr_QiJgLwaPJVSEtBk5J_-1_HZAsim4dC0A/exec';
+        
+        let currentQuestion = 1;
+        const totalQuestions = 12;
+        const responses = {};
+
+        // Value slider
+        const valueSlider = document.getElementById('valueSlider');
+        const valueDisplay = document.getElementById('valueDisplay');
+        valueSlider.oninput = function() {
+            valueDisplay.textContent = this.value;
+        }
+
+        // Option selection handlers
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const input = this.querySelector('input');
+                if (input.type === 'radio') {
+                    this.closest('.question-section').querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                }
+                if (input.type === 'checkbox') {
+                    this.classList.toggle('selected');
+                }
+            });
+        });
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function saveCurrentQuestionData() {
+            const currentSection = document.querySelector(`.question-section[data-question="${currentQuestion}"]`);
+            
+            // Save radio buttons
+            const radios = currentSection.querySelectorAll('input[type="radio"]:checked');
+            radios.forEach(radio => {
+                responses[radio.name] = radio.value;
+            });
+            
+            // Save checkboxes
+            const checkboxGroups = {};
+            const checkboxes = currentSection.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                if (!checkboxGroups[checkbox.name]) {
+                    checkboxGroups[checkbox.name] = [];
+                }
+                if (checkbox.checked) {
+                    checkboxGroups[checkbox.name].push(checkbox.value);
+                }
+            });
+            Object.keys(checkboxGroups).forEach(name => {
+                responses[name] = checkboxGroups[name].join(', ');
+            });
+            
+            // Save text inputs and selects
+            const textInputs = currentSection.querySelectorAll('input[type="text"], input[type="email"], input[type="number"], select, textarea');
+            textInputs.forEach(input => {
+                if (input.value) {
+                    responses[input.name] = input.value;
+                }
+            });
+            
+            // Save range slider
+            const slider = currentSection.querySelector('input[type="range"]');
+            if (slider) {
+                responses['value_rating'] = slider.value;
+            }
+        }
+
+        function changeQuestion(direction) {
+            saveCurrentQuestionData();
+            
+            document.querySelector(`.question-section[data-question="${currentQuestion}"]`).classList.remove('active');
+            
+            currentQuestion += direction;
+            
+            document.querySelector(`.question-section[data-question="${currentQuestion}"]`).classList.add('active');
+            
+            // Update buttons
+            document.getElementById('prevBtn').style.display = currentQuestion === 1 ? 'none' : 'block';
+            document.getElementById('nextBtn').style.display = currentQuestion === totalQuestions ? 'none' : 'block';
+            document.getElementById('submitBtn').style.display = currentQuestion === totalQuestions ? 'block' : 'none';
+            
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        async function submitSurvey() {
+            saveCurrentQuestionData();
+            
+            // Add timestamp
+            responses['timestamp'] = new Date().toISOString();
+            
+            // Show loading overlay
+            document.getElementById('loadingOverlay').classList.add('active');
+            
+            try {
+                // Submit to Google Sheets if URL is configured
+                if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(responses)
+                    });
+                }
+                
+                // Small delay to show loading state
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+            } catch (error) {
+                console.log('Note: Response saved locally. Google Sheets sync will happen when configured.');
+            }
+            
+            // Hide loading
+            document.getElementById('loadingOverlay').classList.remove('active');
+            
+            // Hide questions, show results
+            document.querySelectorAll('.question-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.querySelector('.buttons').style.display = 'none';
+            document.querySelector('.results').classList.add('active');
+            
+            // Display summary
+            displaySummary();
+            
+            // Update progress to 100%
+            document.getElementById('progressFill').style.width = '100%';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function displaySummary() {
+            const summary = document.getElementById('responsesSummary');
+            let html = '<ul style="list-style: none; padding: 0;">';
+            
+            const labels = {
+                'q1': 'Your Situation',
+                'q2': 'Top Concerns',
+                'q3': 'Family Conflict Experience',
+                'q4': 'Services Used',
+                'q5': 'Current Frustrations',
+                'value_rating': 'Value Rating (0-10)',
+                'q8': 'Expected Pricing',
+                'q9': 'Preferred Engagement',
+                'q11': 'Discovery Channels',
+                'age': 'Age Range',
+                'income': 'Income Range',
+                'siblings': 'Number of Siblings'
+            };
+            
+            for (const [key, value] of Object.entries(responses)) {
+                if (value && labels[key]) {
+                    html += `<li style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e0e0e0;">
+                        <strong style="color: #667eea;">${labels[key]}:</strong><br>
+                        <span style="color: #666;">${value}</span>
+                    </li>`;
+                }
+            }
+            
+            html += '</ul>';
+            summary.innerHTML = html;
+        }
+
+        function downloadResults() {
+            // Create CSV content
+            let csv = 'Question,Response\n';
+            
+            for (const [key, value] of Object.entries(responses)) {
+                const escapedValue = String(value).replace(/"/g, '""');
+                csv += `"${key}","${escapedValue}"\n`;
+            }
+            
+            // Add timestamp
+            csv += `"Timestamp","${new Date().toISOString()}"\n`;
+            
+            // Create download
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `family-legacy-survey-${Date.now()}.csv`;            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
